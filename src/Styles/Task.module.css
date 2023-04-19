@@ -1,0 +1,16 @@
+.task{
+    width: 46rem;
+    background: var(--gray-500);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    border-radius: 8px;
+    border: 1px solid var(--gray-400);
+}
+
+circle{
+    color: var(--blue);
+}

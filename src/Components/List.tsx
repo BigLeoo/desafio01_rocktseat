@@ -20,13 +20,16 @@ export const List = () => {
         </div>
 
         <div className={styles.listTasks}>
-            <div className={styles.noneTasks}>
+            {/* <div className={styles.noneTasks}>
                 <ClipboardText size={56} color='#333333' />
                 <span>Você ainda não tem tarefas cadastradas</span>
                 <p>Crie tarefas e organize seus itens a fazer</p>
-            </div>
+            </div> */}
 
             <Task/>
+            <Task/>
+            <Task/>
+
         </div>
 
     </div>

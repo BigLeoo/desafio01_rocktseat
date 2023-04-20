@@ -3,12 +3,16 @@ import { Circle, CheckCircle, Trash } from 'phosphor-react'
 
 import style from '../Styles/Task.module.css'
 
-export const Task = () => {
+interface  taskProps{
+  task: string;
+}
+
+export const Task = ({task}:taskProps) => {
   return (
     <div className={style.task}>
-      <Circle/>
-      <p>Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.</p>
-      <Trash/>
+      <Circle size='1.5rem' color='#4EA8DE' className={style['circle-icon']}/>
+      <p>{task}</p>
+      <Trash  size='1.5rem' className={style['trash-icon']}/>
     </div>
   )
 }

@@ -3,24 +3,47 @@ import { Circle, Trash } from 'phosphor-react'
 
 import style from '../Styles/Task.module.css'
 
-interface  taskProps{
+interface Tasks{
   task: string;
-  onDeleteTask: (taskToDelete: string) => void;
+  id: string;
+  completed: boolean
+}
+interface  taskProps{
+  task: Tasks;
+  onDeleteTask: (taskToDelete: object) => void;
   decreaseNumberCreatedTasks: () => void;
 }
 
-export const Task = ({task, onDeleteTask, decreaseNumberCreatedTasks}:taskProps) => {
+export const Task = ({task, onDeleteTask, decreaseNumberCreatedTasks, onCompleteTask}:taskProps) => {
 
   function handleDeleteTask(){
     onDeleteTask(task);
     decreaseNumberCreatedTasks();
   }
 
+  function handleCompletTask(){
+    task.completed = true;
+    onCompleteTask( task );
+    // increaseNumberCompletedTasks();
+  }
+
   return (
-    <div className={style.task}>
-      <Circle size='1.5rem' color='#4EA8DE' className={style['circle-icon']}/>
-      <p>{task}</p>
-      <Trash  size='1.5rem' className={style['trash-icon']} onClick={handleDeleteTask}/>
-    </div>
+    <>
+      { ( !task.completed ) ? 
+        (
+          <div className={style.task}>
+            <Circle size='1.5rem' color='#4EA8DE' className={style['circle-icon']} onClick={handleCompletTask}/>
+            <p>{task.task}</p>
+            <Trash  size='1.5rem' className={style['trash-icon']} onClick={handleDeleteTask}/>
+          </div>
+        ) : (
+          <div className={style.taskCompleted}>
+            <Circle size='1.5rem' color='#4EA8DE' className={style['circle-icon']}/>
+            <p>{task.task}</p>
+            <Trash  size='1.5rem' className={style['trash-icon']} onClick={handleDeleteTask}/>
+          </div>
+        )
+      }
+    </>
   )
 }

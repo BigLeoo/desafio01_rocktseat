@@ -4,13 +4,22 @@ import { Header } from './Components/Header'
 import { Input } from './Components/Input'
 import { List } from './Components/List'
 
+import { v4 as uuidv4 } from 'uuid';
 // interface inputProps{
 //   handleNewtask: (activity)
 // } 
 
 export function App(){
 
-  const[tasks, setTasks] = useState(['Terminar Desafio 01 !!!']);
+  const[tasks, setTasks] = useState(
+    [
+    {
+      task: "Terminar desafio",
+      id: uuidv4(),
+      completed: false
+    }
+  ]
+  );
 
   const[numberCreatedTasks, setNumberCratedTasks] = useState(tasks.length);
 
@@ -23,22 +32,42 @@ export function App(){
   }
 
   function onDeleteTask(taskToDelete){
-    const tasksWithoutDeletedOne = tasks.filter(task => {
-      return task != taskToDelete;
-    })
 
-    setTasks(tasksWithoutDeletedOne)
+    const tasksNotToDelete = tasks.filter(task => {
+      
+      return taskToDelete.id != task.id;
+    })
+  
+    setTasks(tasksNotToDelete)
   }
 
   function onSetNewTask(activity) {
+
     setTasks([...tasks, activity]);
+  
+    addNumberCreatedTasks()
+  }
+
+  function onCompleteTask(taskCompleted){
+    console.log(taskCompleted);
+
+    tasks.forEach( obj => {
+      if(obj.id === taskCompleted.id){
+        obj.completed = true;
+      }
+    })
+    console.log(tasks);
+    
+
+    
+    setTasks([tasks]);
   }
   
   return (
     <div className='teste'>
       <Header/>
-      <Input onSetNewTask={onSetNewTask} addNumberCreatedTasks={addNumberCreatedTasks}/>
-      <List task={tasks} onDeleteTask={onDeleteTask} numberCreatedTasks={numberCreatedTasks} decreaseNumberCreatedTasks={decreaseNumberCreatedTasks}/>
+      <Input onSetNewTask={onSetNewTask} arrayTask={tasks}/>
+      <List arrayTask={tasks} onDeleteTask={onDeleteTask} numberCreatedTasks={numberCreatedTasks} decreaseNumberCreatedTasks={decreaseNumberCreatedTasks} onCompleteTask={onCompleteTask}/>
     </div>
     
   )

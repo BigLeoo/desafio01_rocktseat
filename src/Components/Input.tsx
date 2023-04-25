@@ -2,8 +2,9 @@ import React, { ChangeEvent, useState } from 'react'
 import styles from '../Styles/Input.module.css'
 import plus from '../Assets/plus.svg'
 
+import { v4 as uuidv4 } from 'uuid';
 
-export const Input = ({onSetNewTask, addNumberCreatedTasks}) => {
+export const Input = ({onSetNewTask}) => {
 
   const[newTask, setNewTask] = useState('');
 
@@ -13,10 +14,14 @@ export const Input = ({onSetNewTask, addNumberCreatedTasks}) => {
 
   function handleNewTask(){
     if(newTask != ""){
-      onSetNewTask(newTask);
-      setNewTask("");
 
-      addNumberCreatedTasks();
+      onSetNewTask({
+        task: newTask,
+        id: uuidv4(),
+        completed: false
+      })
+
+      setNewTask("");
     }
   }
 

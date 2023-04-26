@@ -22,8 +22,8 @@ export const Task = ({task, onDeleteTask, decreaseNumberCreatedTasks, onComplete
   }
 
   function handleCompletTask(){
-    task.completed = true;
-    onCompleteTask( task );
+    const copyTask = {...task}
+    onCompleteTask( copyTask );
     // increaseNumberCompletedTasks();
   }
 
@@ -32,15 +32,39 @@ export const Task = ({task, onDeleteTask, decreaseNumberCreatedTasks, onComplete
       { ( !task.completed ) ? 
         (
           <div className={style.task}>
-            <Circle size='1.5rem' color='#4EA8DE' className={style['circle-icon']} onClick={handleCompletTask}/>
+
+            <Circle 
+              size='1.5rem' 
+              color='#4EA8DE' 
+              className={style['circle-icon']} 
+              onClick={handleCompletTask}
+            />
+
             <p>{task.task}</p>
-            <Trash  size='1.5rem' className={style['trash-icon']} onClick={handleDeleteTask}/>
+
+            <Trash  
+              size='1.5rem' 
+              className={style['trash-icon']} 
+              onClick={handleDeleteTask}
+            />
+
           </div>
         ) : (
           <div className={style.taskCompleted}>
-            <Circle size='1.5rem' color='#4EA8DE' className={style['circle-icon']}/>
+            <Circle 
+              size='1.5rem' 
+              color='#4EA8DE' 
+              className={style['circle-icon']}
+            />
+
             <p>{task.task}</p>
-            <Trash  size='1.5rem' className={style['trash-icon']} onClick={handleDeleteTask}/>
+
+            <Trash 
+              size='1.5rem' 
+              className={style['trash-icon']} 
+              onClick={handleDeleteTask}
+            />
+            
           </div>
         )
       }

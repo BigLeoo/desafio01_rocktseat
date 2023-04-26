@@ -51,23 +51,38 @@ export function App(){
   function onCompleteTask(taskCompleted){
     console.log(taskCompleted);
 
-    tasks.forEach( obj => {
+    const copyArrayTasks = [...tasks];
+    // console.log("Tasks: ", tasks);
+    
+    // console.log("Copy Tasks: ", copyArrayTasks);
+    
+
+    copyArrayTasks.forEach( obj => {
       if(obj.id === taskCompleted.id){
         obj.completed = true;
       }
     })
-    console.log(tasks);
+    // console.log("Copy Tasks Após: ", copyArrayTasks);
     
 
     
-    setTasks([tasks]);
+    setTasks(copyArrayTasks);
+
+    console.log("Tasks apos setado: ",tasks);
+    
   }
   
   return (
     <div className='teste'>
       <Header/>
       <Input onSetNewTask={onSetNewTask} arrayTask={tasks}/>
-      <List arrayTask={tasks} onDeleteTask={onDeleteTask} numberCreatedTasks={numberCreatedTasks} decreaseNumberCreatedTasks={decreaseNumberCreatedTasks} onCompleteTask={onCompleteTask}/>
+      <List 
+        arrayTask={tasks} 
+        onDeleteTask={onDeleteTask} 
+        numberCreatedTasks={numberCreatedTasks} 
+        decreaseNumberCreatedTasks={decreaseNumberCreatedTasks} 
+        onCompleteTask={onCompleteTask}
+      />
     </div>
     
   )

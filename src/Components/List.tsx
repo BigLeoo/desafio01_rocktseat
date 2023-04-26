@@ -30,7 +30,13 @@ export const List = ({arrayTask, onDeleteTask, numberCreatedTasks, decreaseNumbe
                     </div> 
                 ):(arrayTask.map(task => {
                     return(
-                        <Task task={task} onDeleteTask={onDeleteTask} key={task.id} decreaseNumberCreatedTasks={decreaseNumberCreatedTasks} onCompleteTask={onCompleteTask}/>
+                        <Task 
+                            task={task} 
+                            onDeleteTask={onDeleteTask} 
+                            key={task.id} 
+                            decreaseNumberCreatedTasks={decreaseNumberCreatedTasks} 
+                            onCompleteTask={onCompleteTask}
+                        />
                     )
                 }))
                 

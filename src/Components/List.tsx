@@ -2,9 +2,17 @@ import styles from '../Styles/List.module.css'
 import { Activity, ClipboardText } from 'phosphor-react'
 import { Task } from './Task'
 
+interface ListProps{
+    arrayTask: Array<object>;
+    onDeleteTask: (taskToDelete: object) => void;
+    numberCreatedTasks: number;
+    decreaseNumberCreatedTasks: () => void;
+    onCompleteTask: (task: object) => void;
+    numberCompletedTasks: number;
+    // task: object;
+}
 
-
-export const List = ({arrayTask, onDeleteTask, numberCreatedTasks, decreaseNumberCreatedTasks, onCompleteTask, numberCompletedTasks}) => {
+export const List = ({arrayTask, onDeleteTask, numberCreatedTasks, decreaseNumberCreatedTasks, onCompleteTask, numberCompletedTasks}:ListProps) => {
 
   return (
     <div>

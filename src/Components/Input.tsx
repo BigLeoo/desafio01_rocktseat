@@ -4,7 +4,11 @@ import plus from '../Assets/plus.svg'
 
 import { v4 as uuidv4 } from 'uuid';
 
-export const Input = ({onSetNewTask}) => {
+interface InputProps{
+  onSetNewTask: (actvity: object) => void;
+}
+
+export const Input = ({onSetNewTask}:InputProps) => {
 
   const[newTask, setNewTask] = useState('');
 

@@ -3,15 +3,16 @@ import { Check, Trash } from 'phosphor-react'
 
 import style from '../Styles/Task.module.css'
 
-interface Tasks{
-  task: string;
-  id: string;
-  completed: boolean
-}
+// interface Tasks{
+//   task: string;
+//   id: string;
+//   completed: boolean
+// }
 interface  taskProps{
-  task: Tasks;
+  task: {task: string, id: string, completed: boolean};
   onDeleteTask: (taskToDelete: object) => void;
   decreaseNumberCreatedTasks: () => void;
+  onCompleteTask: (task: object) => void;
 }
 
 export const Task = ({task, onDeleteTask, decreaseNumberCreatedTasks, onCompleteTask}:taskProps) => {

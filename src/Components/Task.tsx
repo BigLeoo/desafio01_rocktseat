@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Circle, Trash } from 'phosphor-react'
+import { Check, Trash } from 'phosphor-react'
 
 import style from '../Styles/Task.module.css'
 
@@ -21,10 +21,9 @@ export const Task = ({task, onDeleteTask, decreaseNumberCreatedTasks, onComplete
     decreaseNumberCreatedTasks();
   }
 
-  function handleCompletTask(){
+  function handleCompletTask(){  
     const copyTask = {...task}
     onCompleteTask( copyTask );
-    // increaseNumberCompletedTasks();
   }
 
   return (
@@ -32,14 +31,10 @@ export const Task = ({task, onDeleteTask, decreaseNumberCreatedTasks, onComplete
       { ( !task.completed ) ? 
         (
           <div className={style.task}>
-
-            <Circle 
-              size='1.5rem' 
-              color='#4EA8DE' 
-              className={style['circle-icon']} 
+            <div 
               onClick={handleCompletTask}
-            />
-
+              className={style.circle}
+            ></div>
             <p>{task.task}</p>
 
             <Trash  
@@ -51,11 +46,12 @@ export const Task = ({task, onDeleteTask, decreaseNumberCreatedTasks, onComplete
           </div>
         ) : (
           <div className={style.taskCompleted}>
-            <Circle 
-              size='1.5rem' 
-              color='#4EA8DE' 
-              className={style['circle-icon']}
-            />
+            <div 
+              onClick={handleCompletTask}
+              className={style.circleCompleted}
+            >
+              <Check color='#F2F2F2' size={32} weight='fill' className={style['check-icon']}/>
+            </div>
 
             <p>{task.task}</p>
 

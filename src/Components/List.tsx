@@ -4,8 +4,7 @@ import { Task } from './Task'
 
 
 
-export const List = ({arrayTask, onDeleteTask, numberCreatedTasks, decreaseNumberCreatedTasks, onCompleteTask}) => {
-
+export const List = ({arrayTask, onDeleteTask, numberCreatedTasks, decreaseNumberCreatedTasks, onCompleteTask, numberCompletedTasks}) => {
 
   return (
     <div>
@@ -16,7 +15,7 @@ export const List = ({arrayTask, onDeleteTask, numberCreatedTasks, decreaseNumbe
             </div>
             <div className={styles.doneTasks}>
                 <p>Concluídas</p>
-                <span>0</span>
+                <span>{numberCompletedTasks}</span>
             </div>
         </div>
 

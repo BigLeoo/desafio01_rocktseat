@@ -16,19 +16,36 @@ export function App(){
     {
       task: "Terminar desafio",
       id: uuidv4(),
-      completed: false
+      completed: true
     }
   ]
   );
 
   const[numberCreatedTasks, setNumberCratedTasks] = useState(tasks.length);
+  const[numberCompletedTasks, setNumberCompletedTasks] = useState(1)
 
   function addNumberCreatedTasks(){
       setNumberCratedTasks(tasks.length + 1);
   }
 
+  function increaseNumberCompletedTasks(){
+    let completedTasks = 0;
+    tasks.forEach(obj => {
+      if(obj.completed == true){
+        completedTasks += 1
+      }
+    })
+    setNumberCompletedTasks(completedTasks);
+  }
+
   function decreaseNumberCreatedTasks(){
     setNumberCratedTasks(tasks.length - 1);
+    if(tasks.length === 1){
+      setNumberCompletedTasks(0);
+    } else {
+      const attNumberCompleted = numberCompletedTasks - 1;
+      setNumberCompletedTasks(attNumberCompleted);
+    }
   }
 
   function onDeleteTask(taskToDelete){
@@ -37,8 +54,9 @@ export function App(){
       
       return taskToDelete.id != task.id;
     })
-  
-    setTasks(tasksNotToDelete)
+
+    setTasks(tasksNotToDelete);
+    increaseNumberCompletedTasks();
   }
 
   function onSetNewTask(activity) {
@@ -48,28 +66,26 @@ export function App(){
     addNumberCreatedTasks()
   }
 
-  function onCompleteTask(taskCompleted){
-    console.log(taskCompleted);
-
+  function onCompleteTask(task){
     const copyArrayTasks = [...tasks];
-    // console.log("Tasks: ", tasks);
-    
-    // console.log("Copy Tasks: ", copyArrayTasks);
-    
 
-    copyArrayTasks.forEach( obj => {
-      if(obj.id === taskCompleted.id){
-        obj.completed = true;
-      }
-    })
-    // console.log("Copy Tasks Após: ", copyArrayTasks);
-    
+    if(task.completed === false){
+      copyArrayTasks.forEach( obj => {
+        if(obj.id === task.id){
+          obj.completed = true;
+        }
+      })
+    } else {
+      copyArrayTasks.forEach( obj => {
+        if(obj.id === task.id){
+          obj.completed = false;
+        }
+      })
+    }
 
-    
     setTasks(copyArrayTasks);
 
-    console.log("Tasks apos setado: ",tasks);
-    
+    increaseNumberCompletedTasks();
   }
   
   return (
@@ -82,6 +98,7 @@ export function App(){
         numberCreatedTasks={numberCreatedTasks} 
         decreaseNumberCreatedTasks={decreaseNumberCreatedTasks} 
         onCompleteTask={onCompleteTask}
+        numberCompletedTasks={numberCompletedTasks}
       />
     </div>
     
